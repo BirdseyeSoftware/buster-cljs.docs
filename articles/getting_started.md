@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with buster-cljs"
+title: "buster-cljs | Getting Started"
 layout: article
 ---
 
@@ -70,6 +70,7 @@ and slave some browsers
 
     $> buster-server
 
+<a href="#" id="setup_cljsbuild_and_busterjs"></a>
 ## Setting up your cljsbuild and buster.js
 
 In order for your project to work as intended with busterjs, you'll
@@ -100,15 +101,23 @@ follows:
          :externs ["resouces/externs/buster.js"]
          :libraries ["resources/js/my_cljs_project_dev.js"]
          :output-to "resources/js/my_cljs_project_browser_test.js"}}
-      {:id "node-test"
+       {:id "browser-advanced-test"
         :source-path "test/cljs"
         :compiler
-        {:optimizations :simple
-         :pretty-print true
-         :target :nodejs
+        {:optimizations :advanced
+         :pretty-print false
          :externs ["resouces/externs/buster.js"]
          :libraries ["resources/js/my_cljs_project_dev.js"]
-         :output-to "resources/js/my_cljs_project_node_test.js"}}]})
+         :output-to "resources/js/my_cljs_project_browser_optimized_test.js"}}
+       {:id "node-test"
+         :source-path "test/cljs"
+         :compiler
+         {:optimizations :simple
+          :pretty-print true
+          :target :nodejs
+          :externs ["resouces/externs/buster.js"]
+          :libraries ["resources/js/my_cljs_project_dev.js"]
+          :output-to "resources/js/my_cljs_project_node_test.js"}}]})
 
 
 Notice that we use the `dev` build as a library source in both
@@ -126,19 +135,19 @@ test suites are.
     config["Browser Tests"] = {
         environment: "browser",
         sources: [],
-        tests: ["resources/js/my_cljs_project_browser_test.js"]
+        tests: [ "resources/js/my_cljs_project_browser_test.js"
+               , "resources/js/my_cljs_project_browser_optimized_test.js"]
     };
 
-    config["Server Tests"] = {
+    config["Node Tests"] = {
         environment: "node",
         sources: [],
         tests: ["resources/js/my_cljs_project_node_test.js"]
     };
 
-__important__: You may be able specify an advanced compilation mode
-with buster-cljs, although this code will only work for browser js
-development, Clojurescript doesn't support advanced compilation and
-node just yet.
+__Important__: You may be able specify an advanced compilation mode
+with buster-cljs only for browser js; nodejs with advanced compilation
+is not supported just yet.
 
 ## Running your tests in buster.js
 
@@ -183,12 +192,12 @@ Lets say there is a test in our project like the following
 
 
 
-__important__: In order to see your test results via buster, __you
-need__ to wrap your assertions inside an `it` clause.
+__Important__: In order to see your test results via buster, _you'll
+need_ to wrap your assertions inside an `it` clause.
 
 ## Wrapping Up
 
-Congratulations, you now know how to do most of the setup and
+Congratulations! You now know how to do most of the setup and
 implementation of simple tests using buster-cljs, by now you should
 know:
 
@@ -205,5 +214,5 @@ using [lein-dalap][lein_dalap], and more about what [buster.js may offer][buster
 
 [node_install]:http://joyent.com/blog/installing-node-and-npm
 [lein_cljsbuild]:https://github.com/emezeske/lein-cljsbuild
-[lein_dalap]:https://github.com/BirdseyeSoftware/lein-dalap
+[lein_dalap]:http://birdseye-sw.com/oss/lein-dalap/
 [busterjs]:http://docs.busterjs.org/en/latest/

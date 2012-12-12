@@ -46,14 +46,14 @@ This library has been test with busterjs 0.6.3 beta 4
 
 With leiningen:
 
-    [com.birdseye/buster-cljs "0.1.0"]
+    [com.birdseye-sw/buster-cljs "{{site.package_version}}"]
 
 With Maven:
 
     <dependency>
-      <groupId>com.birdseye</groupId>
+      <groupId>com.birdseye-sw</groupId>
       <artifactId>buster-cljs</artifactId>
-      <version>0.1.0</version>
+      <version>{{site.package_version}}</version>
     </dependency>
 
 ## Installing buster.js
@@ -82,7 +82,7 @@ the development code, and multiple ones for the test code, example
 follows:
 
     (defproject my-cljs-project
-      :dependencies [[buster-cljs "0.1.0"]]
+      :dependencies [[com.birdseye-sw/buster-cljs {{config.package_version}}]]
       :cljsbuild
       {:builds
       [{:id "dev"

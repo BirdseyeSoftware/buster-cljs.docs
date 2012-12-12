@@ -210,7 +210,8 @@ know:
 ## What to read next
 
 Read how to manage easily cross-platforms Clojure/Clojurescript code
-using [lein-dalap][lein_dalap], and more about what [buster.js may offer][busterjs]
+using [lein-dalap][lein_dalap], and more about what [buster.js may offer][busterjs]. There are
+[other buster-cljs guides]({{site.baseurl}}/articles/guides.html) to check out as well.
 
 [node_install]:http://joyent.com/blog/installing-node-and-npm
 [lein_cljsbuild]:https://github.com/emezeske/lein-cljsbuild

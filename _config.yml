@@ -1,4 +1,6 @@
 source:      .
+baseurl: /buster-cljs.docs
+url: http://localhost:4000
 destination: ./_site
 plugins:     ./_plugins
 auto: true

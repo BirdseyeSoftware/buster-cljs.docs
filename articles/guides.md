@@ -10,7 +10,7 @@ layout: article
 We recommend that you read these guides, if possible, in this order:
 
 
-###  [Getting started](/articles/getting_started.html)
+###  [Getting started]({{site.baseurl}}/articles/getting_started.html)
 
 This guides teaches you how to get up and running quickly, the points covered are:
 

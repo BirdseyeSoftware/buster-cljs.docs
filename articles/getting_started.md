@@ -20,18 +20,14 @@ project, specificaly:
 buster-cljs provides a powerful platform to test your Clojurescript
 code both in the browser (using many different vendors) and node.
 
-This is done by installing the node package busterjs and then running
-a node web server that, when accessed through a browser, you can make
-it a slave. By doing this, whenever you want to run your javascript
-test from the terminal, you'll use the `buster-test' command to push
-the test suite from the node server to the different browser that are
-slaves, executing the tests in their environment and then giving you
-back the result.
+Buster.js is a node.js package that a) provides a test case /
+assertions library and b) runs a node web server which pushes tests
+out to any browsers you slave to it. When you want to run your
+javascript tests, you issue the `buster-test' command in the terminal
+to push tests to slaved browsers, in parallel, and collect the
+results.
 
-The API for buster-cljs trys to mimic as much as it cans the
-clojure.test library, there is a compatibility layer that this library
-provides, to make it easy to have test suites both for Clojure and
-Clojurescript using the same codebase.
+The surface-level API for buster-cljs is clojure.test compatible.
 
 ## Supported Clojure/Clojurescript Versions
 
@@ -40,7 +36,7 @@ version that comes bundled with lein-cljsbuild 0.2.9
 
 ## Supported buster.js version
 
-This library has been test with busterjs 0.6.3 beta 4
+This library has been tested with busterjs 0.6.3 beta 4.
 
 ## Adding buster-cljs to your project
 
@@ -58,17 +54,18 @@ With Maven:
 
 ## Installing buster.js
 
-In order to start, you'll need to install nodejs and npm, please
-follow instructions to install [here][node_install].
+In order to start, you'll need to install node.js and npm. 
+Follow the instructions [here][node_install].
 
-Later, you will need to install buster package using npm
+Next, install the buster package using npm
 
     $> npm install -g buster
 
-Once the library is installed, you have to run the `buster-server` command
-and slave some browsers
+Once the library is installed, create a `buster.js` config file in your project root directory and run the `buster-server` command.  
 
     $> buster-server
+
+Buster is now waiting for you to slave some browsers to the server you just started.  Follow the link it gives you.
 
 <a href="#" id="setup_cljsbuild_and_busterjs"></a>
 ## Setting up your cljsbuild and buster.js
@@ -77,10 +74,9 @@ In order for your project to work as intended with busterjs, you'll
 need to create 3 different builds using the [lein-cljsbuild][lein_cljsbuild] plugin.
 
 Let's assume there are 2 folders in your project, `src/cljs` and
-`test/cljs`, the first one contains the actual code, and the second
+`test/cljs`.  The first one contains the actual code and the second
 one contains the test code. You will need to have one build just for
-the development code, and multiple ones for the test code, example
-follows:
+the development code and multiple ones for the test code. For example:
 
     (defproject my-cljs-project
       :dependencies [[com.birdseye-sw/buster-cljs {{config.package_version}}]]
@@ -121,14 +117,14 @@ follows:
 
 
 Notice that we use the `dev` build as a library source in both
-`browser-test` and `node-test`, this is to keep your library/app code
+`browser-test` and `node-test`.  This is to keep your library/app code
 separated from the test code. Also is important to mention that the
 `dev` build must be compiled always with a __simple__ optimization,
 otherwise the test won't be able to compile correctly.
 
-Once your `project.clj` has this builds, you have to create in the
-root of your project a buster.js file that specifies the js where the
-test suites are.
+Once your `project.clj` has these builds you have to create a
+`buster.js` config in the root of your project. It specifies
+where the test suites are:
 
     var config = exports;
 
@@ -145,14 +141,13 @@ test suites are.
         tests: ["resources/js/my_cljs_project_node_test.js"]
     };
 
-__Important__: You may be able specify an advanced compilation mode
-with buster-cljs only for browser js; nodejs with advanced compilation
-is not supported just yet.
+__Important__: Advanced compilation mode is only supported in the
+browser. Node.js with advanced compilation is not supported just yet.
 
 ## Running your tests in buster.js
 
-Now you are ready to run the tests, once you have some slave browsers
-connected to the `buster-server`, you can run:
+Now you are ready to run the tests.  Once you have some slave browsers
+connected to `buster-server`, run:
 
     $> buster-test -e browser
 
@@ -160,18 +155,18 @@ If you want to execute the tests for node:
 
     $> buster-test -e node
 
-You may also be able to see the test suite as an static page (qUnit style)
-by running a command on the root directory of your project
+You can also see the test suite as a static page (qUnit style)
+by running this command in the root directory of your project:
 
     $> buster-static
 
 ## Crossplatform testing with lein-dalap
 
-buster-cljs works both for Clojure and Clojurescript, by using
-[lein-dalap][lein_dalap], you can easily make your code work for both
-of them without to much of a hassle.
+buster-cljs works both for Clojure and Clojurescript by using
+[lein-dalap][lein_dalap]. 
 
-Lets say there is a test in our project like the following
+This example demonstrates use of lein-dalap to translate the JVM
+specific forms to JS compatible Clojurescript:
 
     ^{:cljs
       '(ns my-cljs-project.test.util-test
@@ -191,15 +186,14 @@ Lets say there is a test in our project like the following
          (is (= (util/shout "hello") "HELLO") "shout should make hello all caps")))
 
 
-
 __Important__: In order to see your test results via buster, _you'll
-need_ to wrap your assertions inside an `it` clause.
+need_ to wrap your assertions inside `it` clauses.
 
 ## Wrapping Up
 
 Congratulations! You now know how to do most of the setup and
-implementation of simple tests using buster-cljs, by now you should
-know:
+implementation of simple tests using buster-cljs. By now you should be
+able to:
 
 * Install buster-cljs
 * Install buster with node and npm
@@ -209,9 +203,9 @@ know:
 
 ## What to read next
 
-Read how to manage easily cross-platforms Clojure/Clojurescript code
-using [lein-dalap][lein_dalap], and more about what [buster.js may offer][busterjs]. There are
-[other buster-cljs guides]({{site.baseurl}}/articles/guides.html) to check out as well.
+Read how to manage cross-platforms Clojure/Clojurescript code using
+[lein-dalap][lein_dalap] and more about what [buster.js may
+offer][busterjs]. 
 
 [node_install]:http://joyent.com/blog/installing-node-and-npm
 [lein_cljsbuild]:https://github.com/emezeske/lein-cljsbuild

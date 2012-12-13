@@ -17,9 +17,9 @@ continious testing.
 
 ## Automate installation of busterjs dependency
 
-In order to run busterjs tests on Travis CI, you will require a `package.json` file in the
-root of your project. This file is used by nodejs' npm to track the package meta-data and
-dependencies. Follow the sample given next:
+In order to run busterjs tests on Travis CI, you need a `package.json`
+file in the root of your project. This file is used by node.js' npm to
+track the package meta-data and dependencies. For example:
 
     // This file is only here for busterjs dependency management in Travis CI
     {
@@ -31,22 +31,21 @@ dependencies. Follow the sample given next:
         "scripts": { "test": "buster-test -e node && buster-test -e browser" }
     }
 
-With this files you will be able to install buster using `npm
-install`, and to run your testsuite using `npm test`.
+You can now install buster using `npm install`, and to run your
+testsuite using `npm test`.
 
 __Important:__ you need to follow the instructions on how to [setup
 buster.js configuration
 file]({{site.baseurl}}/articles/getting_started.html#setup_cljsbuild_and_busterjs),
 otherwise the test suite won't be executed correctly with busterjs.
 
-In case you don't want your Clojurescript library to support nodejs,
+In case you don't want your Clojurescript library to support node.js,
 you may remove the `buster-test -e node` bit on the code above.
 
 
 ### Add a .travis.yml file to your project
 
-Next step is to add a `.travis.yml` file to your project, follow the
-sample given next:
+Next step is to add a `.travis.yml` file to your project:
 
     language:
       - node_js
@@ -70,7 +69,7 @@ sample given next:
       - lein2 test && npm test
 
 This script will run the `buster-server` and start a phantomjs
-headless browser that will slave automatically to it, then it will
+headless browser that will slave automatically to it.  It will then
 execute both Clojure JVM testsuite (using `lein2 test`) and Clojurescript
 testsuite (using `npm test`).
 

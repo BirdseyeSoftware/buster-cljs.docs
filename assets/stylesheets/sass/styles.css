@@ -74,19 +74,21 @@ footer {
   padding: 9px 0; }
 
 .headline {
-  padding: 50px; }
+  padding: 25px 50px; }
   .headline h1 {
     font-size: 100px;
-    line-height: 250px;
+    margin-bottom: 0;
+    line-height: 150px;
     font-family: "Signika Negative", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-  .headline p {
-    padding-top: 20px;
+  .headline .subtitle {
     font-family: "Signika Negative", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 200;
-    line-height: 27px; }
+    line-height: 27px;
+    margin-bottom: 10px;
+    padding-left: 6px; }
   .headline .logo {
-    margin-left: auto;
+    margin-left: 0;
     margin-right: auto;
     width: 900px; }
 
@@ -137,4 +139,7 @@ h2 {
   padding: 20px; }
 
 .row-fluid {
-  padding-top: 55px; }
+  padding-top: 30px; }
+  .row-fluid h2 {
+    line-height: 1em;
+    margin-bottom: 10px; }

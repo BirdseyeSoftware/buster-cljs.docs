@@ -35,8 +35,8 @@ Clojurescript using the same codebase.
 
 ## Supported Clojure/Clojurescript Versions
 
-This library has been tested with Clojure 1.4, and Clojurescript version that
-comes bundled with lein-cljsbuild 0.2.9
+This library has been tested with Clojure 1.4, and Clojurescript
+version that comes bundled with lein-cljsbuild 0.2.9
 
 ## Supported buster.js version
 
